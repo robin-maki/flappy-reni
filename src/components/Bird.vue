@@ -41,8 +41,10 @@ const remove = tryMountTicker((dt) => {
   velocity.value += gravity * dt;
 });
 
-function jump() {
+function jump(e: Event) {
   if (props.disabled) return;
+  e.stopPropagation();
+  e.preventDefault();
   audios.wing.play();
   // jump upwards when clicked, negative velocity indicates upward direction
   velocity.value = -8;
@@ -51,7 +53,7 @@ function jump() {
 // listen for space bar key press to jump
 onKeyDown(" ", jump);
 // listen for click event to jump
-useEventListener("click", jump);
+useEventListener(["click", "touchstart"], jump);
 
 // when hitting the ground, player dies
 whenever(

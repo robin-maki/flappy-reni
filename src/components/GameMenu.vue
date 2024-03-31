@@ -23,7 +23,8 @@ const scale = useElementHoverScale(containerRef);
     :x="320"
     :y="180"
     :scale="0.15"
-    @click="emit('start')">
+    @click="emit('start')"
+    @touchstart="emit('start')">
     <sprite :y="offsetY" :texture="texture" :anchor="0.5" :scale="scale" />
   </container>
 </template>

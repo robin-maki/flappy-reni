@@ -1,38 +1,30 @@
 <script lang="ts" setup>
-import { SCALE_MODES, Texture } from 'pixi.js'
-import { ref } from 'vue'
-import gameoverPNG from '../assets/sprites/message.png'
-import { useElementHoverScale } from '../composables/useElementHoverScale'
-import { useCosineAmplitude } from '../composables/useCosineAmplitude'
+import { SCALE_MODES, Texture } from "pixi.js";
+import { ref } from "vue";
+import logoPNG from "../assets/sprites/flappyreni.png";
+import { useElementHoverScale } from "../composables/useElementHoverScale";
+import { useCosineAmplitude } from "../composables/useCosineAmplitude";
 
-const emit = defineEmits(['start'])
+const emit = defineEmits(["start"]);
 
-const texture = Texture.from(gameoverPNG, {
+const texture = Texture.from(logoPNG, {
   scaleMode: SCALE_MODES.NEAREST,
-})
+});
 
-const containerRef = ref()
+const containerRef = ref();
 
-const offsetY = useCosineAmplitude()
-const scale = useElementHoverScale(containerRef)
+const offsetY = useCosineAmplitude();
+const scale = useElementHoverScale(containerRef);
 </script>
 
 <template>
   <container
     ref="containerRef"
-    :x="320" :y="180"
-    :scale="1.35"
-    @click="emit('start')"
-  >
-    <tiling-sprite
-      :y="offsetY"
-      :texture="texture"
-      :width="184"
-      :height="60"
-      :anchor="0.5"
-      :scale="scale"
-      :tile-position="{ x: 0, y: -1 }"
-    />
+    :x="320"
+    :y="180"
+    :scale="0.15"
+    @click="emit('start')">
+    <sprite :y="offsetY" :texture="texture" :anchor="0.5" :scale="scale" />
   </container>
 </template>
 
